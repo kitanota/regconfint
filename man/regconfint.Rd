@@ -2,16 +2,16 @@
 % Please edit documentation in R/regconfint.R
 \name{regconfint}
 \alias{regconfint}
-\title{Estimating confidence interval for regularized regression}
+\title{Estimate confidence interval for regularized regression}
 \usage{
 regconfint(dataset, expv, tarv, itr, al, sed, fam, lin, typ = "all")
 }
 \arguments{
-\item{dataset}{dataset for calculating CI}
+\item{dataset}{data.frame for estimation of confidence intervals}
 
-\item{expv}{explanatory variables(character)}
+\item{expv}{vector of explanatory variables}
 
-\item{tarv}{target variable(character)}
+\item{tarv}{target variable}
 
 \item{itr}{number of iteration}
 
@@ -19,18 +19,26 @@ regconfint(dataset, expv, tarv, itr, al, sed, fam, lin, typ = "all")
 
 \item{sed}{seed for bootstrap}
 
-\item{fam}{distribution of the model}
+\item{fam}{Either a character string representing one of the built-in families, or else a glm() family object. For more information, see R documentation of glmnet.}
 
 \item{lin}{link function of the model}
 
-\item{typ}{type of intervals required.}
+\item{typ}{type of intervals required. Default is "all", For more information, see the R documentation of boot.}
 }
 \value{
 return the bootstrap confidence interval from glmnet object
 }
 \description{
-\code{regconfint} Estimating confidence interval for regularized regression
+\code{regconfint} regconfint can estimate confidence interval for regularized regression
 }
 \examples{
+#Ridge regression
+#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=0, seed=1, fam="poisson", lin="log")
+
+#Lasso regression
 #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=1, seed=1, fam="poisson", lin="log")
+
+#Elastic-net
+#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=seq(0.01,0.99,0.01), seed=1, fam="poisson",
+# lin="log")
 }

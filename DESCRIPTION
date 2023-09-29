@@ -4,8 +4,7 @@ Title: What the Package Does (Title Case)
 Version: 0.0.1
 Author: Takahiro Kitano
 Maintainer: Takahiro Kitano <takahiro.kitano@gmail.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Estimate confidence intervals for regularized regression
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

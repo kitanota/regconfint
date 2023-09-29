@@ -1,27 +1,36 @@
-#' @title Estimating confidence interval for regularized regression
-#' @description \code{regconfint} Estimating confidence interval for regularized regression
-#'
+#' @title Estimate confidence interval for regularized regression
+#' @description \code{regconfint} regconfint can estimate confidence interval for regularized regression
 #' @importFrom dplyr select
 #' @importFrom glmnet cv.glmnet
 #' @importFrom glmnet glmnet
 #' @importFrom boot boot
 #' @importFrom boot boot.ci
-#' @param dataset dataset for calculating CI
-#' @param expv explanatory variables(character)
-#' @param tarv target variable(character)
+#' @param dataset data.frame for estimation of confidence intervals
+#' @param expv vector of explanatory variables
+#' @param tarv target variable
 #' @param itr number of iteration
 #' @param al alpha for regularized regression:0(Ridge),1(Lasso) or sequence of alpha for elastic-net
 #' @param sed seed for bootstrap
-#' @param fam distribution of the model
+#' @param fam Either a character string representing one of the built-in families, or else a glm() family object. For more information, see R documentation of glmnet.
 #' @param lin link function of the model
-#' @param typ type of intervals required.
+#' @param typ type of intervals required. Default is "all", For more information, see the R documentation of boot.
 #' @return return the bootstrap confidence interval from glmnet object
 #' @export
 #' @examples
+#' #Ridge regression
+#' #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=0, seed=1, fam="poisson", lin="log")
+#'
+#' #Lasso regression
 #' #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=1, seed=1, fam="poisson", lin="log")
+#'
+#' #Elastic-net
+#' #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=seq(0.01,0.99,0.01), seed=1, fam="poisson",
+#' # lin="log")
+
+
 
 regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all")
-{if (al == 0|al == 1){
+{if (length(al) == 1){
   get_RR <- function(d,i){
     x1 <- dataset[i,] %>%
       dplyr::select(all_of(expv))
