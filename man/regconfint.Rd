@@ -32,5 +32,5 @@ return the bootstrap confidence interval from glmnet object
 \code{regconfint} Estimating confidence interval for regularized regression
 }
 \examples{
-#regconfint(dataset=xxxx, expv=c("a","b","c"), tarv="target", itr=1000, al=1, seed=1234, fam="poisson", lin="log")
+#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=1, seed=1, fam="poisson", lin="log")
 }

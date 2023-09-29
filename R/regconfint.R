@@ -1,10 +1,11 @@
 #' @title Estimating confidence interval for regularized regression
 #' @description \code{regconfint} Estimating confidence interval for regularized regression
-#' @importFrom dplyr SELECT
-#' @importFrom glmnet CV.GLMNET
-#' @importFrom glmnet GLMNET
-#' @importFrom boot BOOT
-#' @importFrom boot BOOT.CI
+#'
+#' @importFrom dplyr select
+#' @importFrom glmnet cv.glmnet
+#' @importFrom glmnet glmnet
+#' @importFrom boot boot
+#' @importFrom boot boot.ci
 #' @param dataset dataset for calculating CI
 #' @param expv explanatory variables(character)
 #' @param tarv target variable(character)
@@ -17,7 +18,7 @@
 #' @return return the bootstrap confidence interval from glmnet object
 #' @export
 #' @examples
-#' #regconfint(dataset=xxxx, expv=c("a","b","c"), tarv="target", itr=1000, al=1, seed=1234, fam="poisson", lin="log")
+#' #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=1, seed=1, fam="poisson", lin="log")
 
 regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all")
 {if (al == 0|al == 1){
