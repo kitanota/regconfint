@@ -1,5 +1,5 @@
-#' @title Estimate confidence interval for regularized regression
-#' @description \code{regconfint} regconfint can estimate confidence interval for regularized regression
+#' @title Estimate bootstrap confidence interval for regularized regression
+#' @description \code{regconfint} regconfint can estimate bootstrap confidence interval for regularized regression
 #' @importFrom dplyr select
 #' @importFrom dplyr %>%
 #' @importFrom glmnet cv.glmnet
@@ -14,7 +14,7 @@
 #' @param sed seed for bootstrap
 #' @param fam Either a character string representing one of the built-in families, or else a glm() family object. For more information, see R documentation of glmnet.
 #' @param lin link function of the model
-#' @param typ type of intervals required. Default is "all", For more information, see the R documentation of boot.
+#' @param typ type of intervals required. Default is "all". For more information, see the R documentation of boot.
 #' @return return the bootstrap confidence interval from glmnet object
 #' @export
 #' @examples
