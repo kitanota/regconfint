@@ -1,6 +1,7 @@
 #' @title Estimate confidence interval for regularized regression
 #' @description \code{regconfint} regconfint can estimate confidence interval for regularized regression
 #' @importFrom dplyr select
+#' @importFrom dplyr %>%
 #' @importFrom glmnet cv.glmnet
 #' @importFrom glmnet glmnet
 #' @importFrom boot boot
