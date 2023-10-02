@@ -33,7 +33,8 @@ return the bootstrap confidence interval from glmnet object
 }
 \examples{
 #Ridge regression
-#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=0, seed=1, fam="poisson", lin="log")
+#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=0, seed=1, fam=c("gaussian",
+#"binomial", "poisson", "multinomial", "cox", "mgaussian")poisson", lin="log")
 
 #Lasso regression
 #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=1, seed=1, fam="poisson", lin="log")

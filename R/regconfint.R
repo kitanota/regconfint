@@ -18,7 +18,8 @@
 #' @export
 #' @examples
 #' #Ridge regression
-#' #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=0, seed=1, fam="poisson", lin="log")
+#' #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=0, seed=1, fam=c("gaussian",
+#' #"binomial", "poisson", "multinomial", "cox", "mgaussian")poisson", lin="log")
 #'
 #' #Lasso regression
 #' #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=1, seed=1, fam="poisson", lin="log")
@@ -38,9 +39,20 @@ regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all")
     y1 <- dataset[i,] %>%
       dplyr::select(all_of(tarv))
     y <- unlist(y1)
-    cvfit_1 <- glmnet::cv.glmnet(x, y, family = fam(link=lin),alpha = al)
+
+    family_obj <- switch(fam,
+                         "gaussian" = gaussian(link = lin),
+                         "binomial" = binomial(link = lin),
+                         "poisson" = poisson(link = lin),
+                         "multinomial" = multinomial(link = lin),
+                         "cox" = cox(link = lin),
+                         "mgaussian" = mgaussian(link = lin),
+                         stop("Invalid fam argument")
+    )
+
+    cvfit_1 <- glmnet::cv.glmnet(x, y, family = family_obj,alpha = al)
     s <- cvfit_1$lambda.min
-    fit <- glmnet::glmnet(x, y, family = fam(link=lin),alpha = al, lambda = s)
+    fit <- glmnet::glmnet(x, y, family = family_obj,alpha = al, lambda = s)
     r <- exp(fit$beta)
     return(r[1:length(expv)])
   }
@@ -66,10 +78,21 @@ regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all")
     y1 <- dataset[i,] %>%
       dplyr::select(all_of(tarv))
     y <- unlist(y1)
+
+    family_obj <- switch(fam,
+                         "gaussian" = gaussian(link = lin),
+                         "binomial" = binomial(link = lin),
+                         "poisson" = poisson(link = lin),
+                         "multinomial" = multinomial(link = lin),
+                         "cox" = cox(link = lin),
+                         "mgaussian" = mgaussian(link = lin),
+                         stop("Invalid fam argument")
+    )
+
     best_alpha <- get_alpha()
-    cvfit <- glmnet::cv.glmnet(x, y, family = fam(link=lin),alpha = best_alpha)
+    cvfit <- glmnet::cv.glmnet(x, y, family = family_obj,alpha = best_alpha)
     s <- cvfit$lambda.min
-    fit <- glmnet::glmnet(x, y, family = fam(link=lin),alpha = best_alpha, lambda = s)
+    fit <- glmnet::glmnet(x, y, family = family_obj,alpha = best_alpha, lambda = s)
     r <- exp(fit$beta)
     return(r[1:length(expv)])
   }
