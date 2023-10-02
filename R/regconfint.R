@@ -64,7 +64,16 @@ regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all")
   get_alpha <- function(){
     mse.df <- NULL
     for (i in 1:length(al)) {
-      m <- glmnet::cv.glmnet(x,y,family = fam(link=lin),alpha = al[i])
+      family_obj <- switch(fam,
+                           "gaussian" = gaussian(link = lin),
+                           "binomial" = binomial(link = lin),
+                           "poisson" = poisson(link = lin),
+                           "multinomial" = multinomial(link = lin),
+                           "cox" = cox(link = lin),
+                           "mgaussian" = mgaussian(link = lin),
+                           stop("Invalid fam argument")
+      )
+      m <- glmnet::cv.glmnet(x,y,family = family_obj,alpha = al[i])
       mse.df <- rbind(mse.df, data.frame(alpha = al[i],
                                          mse = min(m$cvm)))
     }
