@@ -2,9 +2,20 @@
 % Please edit documentation in R/regconfint.R
 \name{regconfint}
 \alias{regconfint}
-\title{Estimate confidence interval for regularized regression}
+\title{Estimate bootstrap confidence interval for regularized regression}
 \usage{
-regconfint(dataset, expv, tarv, itr, al, sed, fam, lin, typ = "all")
+regconfint(
+  dataset,
+  expv,
+  tarv,
+  itr,
+  al,
+  sed,
+  fam,
+  lin,
+  typ = "all",
+  paral = "N"
+)
 }
 \arguments{
 \item{dataset}{data.frame for estimation of confidence intervals}
@@ -23,13 +34,15 @@ regconfint(dataset, expv, tarv, itr, al, sed, fam, lin, typ = "all")
 
 \item{lin}{link function of the model}
 
-\item{typ}{type of intervals required. Default is "all", For more information, see the R documentation of boot.}
+\item{typ}{type of intervals required. Default is "all". For more information, see the R documentation of boot.}
+
+\item{paral}{Y if parallel computing is used for Elastic-net. Default is "N"}
 }
 \value{
 return the bootstrap confidence interval from glmnet object
 }
 \description{
-\code{regconfint} regconfint can estimate confidence interval for regularized regression
+\code{regconfint} regconfint can estimate bootstrap confidence interval for regularized regression
 }
 \examples{
 #Ridge regression
@@ -41,5 +54,6 @@ return the bootstrap confidence interval from glmnet object
 
 #Elastic-net
 #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=seq(0.01,0.99,0.01), seed=1, fam="poisson",
-# lin="log")
+# lin="log", paral="N")
+# If paral = "Y", parallel computing will be implemented based on the number of cores available in your computer
 }

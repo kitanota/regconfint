@@ -12,5 +12,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
     boot,
+    doParallel,
     dplyr,
-    glmnet
+    foreach,
+    glmnet,
+    parallel
