@@ -71,7 +71,7 @@ regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all",paral="N")
 } else if(length(al) > 1 & paral=="Y")
   {get_alpha <- function(){
   mse.df <- NULL
-  num_cores <- parallel::detectCores
+  num_cores <- parallel::detectCores()
   cl <- parallel::makeCluster(num_cores)  # 使用するコア数に合わせて変更
   doParallel::registerDoParallel(cl)
   foreach::foreach(i = 1:length(alpha), .combine = rbind, .packages = 'glmnet' ) %dopar% {
