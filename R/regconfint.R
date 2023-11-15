@@ -19,7 +19,7 @@
 #' @param fam Either a character string representing one of the built-in families, or else a glm() family object. For more information, see R documentation of glmnet.
 #' @param lin link function of the model
 #' @param typ type of intervals required. Default is "all". For more information, see the R documentation of boot.
-#' @param paral Y if parallel computing is used for Elastic-net. Default is "N"
+#' @param paral Y if parallel computing is used for Elastic-net with sequence of alpha. Default is "N"
 #' @return return the bootstrap confidence interval from glmnet object
 #' @export
 #' @examples
@@ -30,7 +30,10 @@
 #' #Lasso regression
 #' #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=1, sed=1, fam="poisson", lin="log")
 #'
-#' #Elastic-net
+#' #Elastic-net with fixed alpha
+#' #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=0.5, sed=1, fam="poisson", lin="log")
+#'
+#' #Elastic-net with sequence of alpha
 #' #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=seq(0.01,0.99,0.01), sed=1, fam="poisson",
 #' # lin="log", paral="N")
 #' # If paral = "Y", parallel computing will be implemented based on the number of cores available
@@ -74,7 +77,7 @@ regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all",paral="N")
   num_cores <- parallel::detectCores()
   cl <- parallel::makeCluster(num_cores)  # 使用するコア数に合わせて変更
   doParallel::registerDoParallel(cl)
-  foreach::foreach(i = 1:length(alpha), .combine = rbind, .packages = 'glmnet' ) %dopar% {
+  foreach::foreach(i = 1:length(alpha), .combine = rbind, .packages = 'glmnet',.export = c("fam", "lin","x","y","al") ) %dopar% {
     family_obj <- switch(fam,
                          "gaussian" = gaussian(link = lin),
                          "binomial" = binomial(link = lin),

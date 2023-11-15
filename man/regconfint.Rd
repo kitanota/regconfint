@@ -36,7 +36,7 @@ regconfint(
 
 \item{typ}{type of intervals required. Default is "all". For more information, see the R documentation of boot.}
 
-\item{paral}{Y if parallel computing is used for Elastic-net. Default is "N"}
+\item{paral}{Y if parallel computing is used for Elastic-net with sequence of alpha. Default is "N"}
 }
 \value{
 return the bootstrap confidence interval from glmnet object
@@ -46,14 +46,18 @@ return the bootstrap confidence interval from glmnet object
 }
 \examples{
 #Ridge regression
-#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=0, seed=1, fam=c("gaussian",
+#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=0, sed=1, fam=c("gaussian",
 #"binomial", "poisson", "multinomial", "cox", "mgaussian")poisson", lin="log")
 
 #Lasso regression
-#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=1, seed=1, fam="poisson", lin="log")
+#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=1, sed=1, fam="poisson", lin="log")
 
-#Elastic-net
-#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=seq(0.01,0.99,0.01), seed=1, fam="poisson",
+#Elastic-net with fixed alpha
+#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=0.5, sed=1, fam="poisson", lin="log")
+
+#Elastic-net with sequence of alpha
+#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=seq(0.01,0.99,0.01), sed=1, fam="poisson",
 # lin="log", paral="N")
-# If paral = "Y", parallel computing will be implemented based on the number of cores available in your computer
+# If paral = "Y", parallel computing will be implemented based on the number of cores available
+# in your computer
 }
