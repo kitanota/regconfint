@@ -38,7 +38,8 @@
 #' # lin="log", paral="N")
 #' # If paral = "Y", parallel computing will be implemented based on the number of cores available
 #' # in your computer
-
+#'
+#' # If you want to reproduce the authors' study, set seed as "1234" with CMV and NCDS dataset
 
 
 regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all",paral="N")
