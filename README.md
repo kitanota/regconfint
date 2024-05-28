@@ -28,11 +28,7 @@ devtools::install_github("kitanota/regconfint")
 #regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=0.5, sed=1, fam="poisson", lin="log")
 
 #Elastic-net with sequence of alpha
-#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=seq(0.01,0.99,0.01), sed=1, fam="poisson",
-# lin="log", paral="N")
-
-# If paral = "Y", parallel computing will be implemented based on the number of cores available
-# in your computer
+#regconfint(dataset, expv=c("x1","x2"), tarv="y", itr=50, al=seq(0.01,0.99,0.01), sed=1, fam="poisson", lin="log", paral="N")
 
 ``` r
 library(regconfint)
