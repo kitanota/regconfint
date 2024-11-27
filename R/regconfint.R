@@ -1,5 +1,5 @@
 #' @title Estimate bootstrap confidence interval for regularized regression
-#' @description \code{regconfint} regconfint can estimate bootstrap confidence interval for regularized regression
+#' @description \code{regconfint} estimate bootstrap confidence interval for regularized regression
 #' @importFrom dplyr select
 #' @importFrom dplyr %>%
 #' @importFrom glmnet cv.glmnet
@@ -71,6 +71,7 @@ regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all",paral="N")
   set.seed(sed)
   boot_out <- boot::boot(dataset, statistic = get_RR, R = itr)
   result <- boot::boot.ci(boot_out,type=typ)
+  #ここはindexを指定しなくて大丈夫か？
   result
 } else if(length(al) > 1 & paral=="Y")
   {get_alpha <- function(){
