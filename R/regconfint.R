@@ -1,5 +1,5 @@
 #' @title Estimate bootstrap confidence interval for regularized regression
-#' @description \code{regconfint} estimate bootstrap confidence interval for regularized regression
+#' @description \code{regconfint} estimates bootstrap confidence interval for regularized regression
 #' @importFrom dplyr select
 #' @importFrom dplyr %>%
 #' @importFrom glmnet cv.glmnet
