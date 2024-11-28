@@ -1,5 +1,5 @@
 #' @title Estimates bootstrap confidence interval for regularized regression
-#' @description \code{regconfint} function calculates confidence intervals for regularized regression coefficients through bootstrapping. The function supports various regression families. For elastic-net, the function supports automatic alpha selection when multiple alpha values are provided, and it also allows for parallel computation to optimize performance.
+#' @description \code{regconfint} function estimates confidence intervals for regularized regression coefficients through bootstrapping. The function supports various regression families. For elastic-net, the function supports automatic alpha selection when multiple alpha values are provided, and it also allows for parallel computation to optimize performance.
 #' @importFrom dplyr select
 #' @importFrom dplyr %>%
 #' @importFrom glmnet cv.glmnet
