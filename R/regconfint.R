@@ -1,5 +1,5 @@
-#' @title Estimate bootstrap confidence interval for regularized regression
-#' @description \code{regconfint} estimates bootstrap confidence interval for regularized regression
+#' @title Estimates bootstrap confidence interval for regularized regression
+#' @description \code{regconfint} function calculates confidence intervals for regularized regression coefficients through bootstrapping. The function supports various regression families. For elastic-net, the function supports automatic alpha selection when multiple alpha values are provided, and it also allows for parallel computation to optimize performance.
 #' @importFrom dplyr select
 #' @importFrom dplyr %>%
 #' @importFrom glmnet cv.glmnet
@@ -10,16 +10,16 @@
 #' @importFrom parallel makeCluster
 #' @importFrom doParallel registerDoParallel
 #' @importFrom foreach foreach
-#' @param dataset data.frame for estimation of confidence intervals
-#' @param expv vector of explanatory variables
-#' @param tarv target variable
-#' @param itr number of iteration
-#' @param al alpha for regularized regression:0(Ridge),1(Lasso) or sequence of alpha for elastic-net
-#' @param sed seed for bootstrap
-#' @param fam Either a character string representing one of the built-in families, or else a glm() family object. For more information, see R documentation of glmnet.
-#' @param lin link function of the model
-#' @param typ type of intervals required. Default is "all". For more information, see the R documentation of boot.
-#' @param paral Y if parallel computing is used for Elastic-net with sequence of alpha. Default is "N"
+#' @param dataset A data frame containing the data used for the estimation of confidence interval. It should include both the explanatory and target variables specified in expv and tarv.
+#' @param expv A character vector specifying the names of the explanatory variables (predictors) in the dataset.
+#' @param tarv A character string specifying the name of the target variable (response variable) in the dataset.
+#' @param itr An integer specifying the number of bootstrap iterations to perform.
+#' @param al A numeric string or vector of alpha values for regularized regression: 0 corresponds to ridge regression; 1 corresponds to lasso regression; Values between 0 and 1 corresponds to elastic-net regression.
+#' @param sed A numeric value to set the random seed for reproducibility.
+#' @param fam A character string specifying the regression family. Supported families include "gausian", "binomial", "poisson", "multinomial", "cox", and "mgaussian." For more information, see R documentation of glmnet.
+#' @param lin A character strig specifying the link function for the specified family.
+#' @param typ A character string specifying the type of confidence interval to compute. Default is "all". Supported types are those provided by the boot.ci function, such as "norm", "basic", "perc", and "bca". For more information, see the R documentation of boot.
+#' @param paral A character string ("Y" or "N") indicating whether to use parallel computation when multiple alpha values are provided for elastic-net. Default is "N".
 #' @return return the bootstrap confidence interval from glmnet object
 #' @export
 #' @examples
