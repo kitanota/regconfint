@@ -70,9 +70,9 @@ regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all",paral="N")
   }
   set.seed(sed)
   boot_out <- boot::boot(dataset, statistic = get_RR, R = itr)
-  result <- boot::boot.ci(boot_out,type=typ)
-  #ここはindexを指定しなくて大丈夫か？
-  result
+  # result <- boot::boot.ci(boot_out,type=typ)
+  # result
+  boot_out
 } else if(length(al) > 1 & paral=="Y")
   {get_alpha <- function(){
   mse.df <- NULL
@@ -123,8 +123,9 @@ get_RR <- function(d,i){
 }
 set.seed(sed)
 boot_out <- boot::boot(dataset, statistic = get_RR, R = itr)
-result <- boot::boot.ci(boot_out,type=typ)
-result
+# result <- boot::boot.ci(boot_out,type=typ)
+# result
+boot_out
 } else {
   get_alpha <- function(){
     mse.df <- NULL
@@ -172,8 +173,9 @@ result
   }
   set.seed(sed)
   boot_out <- boot::boot(dataset, statistic = get_RR, R = itr)
-  result <- boot::boot.ci(boot_out,type=typ)
-  result
+  # result <- boot::boot.ci(boot_out,type=typ)
+  # result
+  boot_out
 }
 }
 
