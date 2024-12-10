@@ -78,6 +78,7 @@ bt <- boot.ci(ridge_RD,type="perc",index=i)
 print(c(Pena_name, "CI of variable_",i))
 print(c(bt$t0,bt$percent[4:5]))
 }
+bt
 
 #Poisson with log-link
 # Ridge regression
@@ -92,6 +93,7 @@ bt <- boot.ci(ridge_RR,type="perc",index=i)
 print(c("CI of variable_",i))
 print(c(bt$t0,bt$percent[4:5]))
 }
+bt
 
 # If paral = "Y", parallel computing will be implemented based on the number of cores available
 # in your computer
