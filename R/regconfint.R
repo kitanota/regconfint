@@ -48,6 +48,7 @@
 #' # Ridge regression
 #' ridge_RD <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=100, al=0, sed=1234, fam="gaussian", lin="identity")
 #' print(ridge_RD)
+#' # Install boot package if necessary
 #' bt_1 <- boot.ci(ridge_RD,type="perc",index=i)
 #' print(c("CI of variable_",i))
 #' print(c(bt_1$t0,bt_1$percent[4:5]))
@@ -62,6 +63,7 @@
 #' # Ridge regression
 #' ridge_RR <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=100, al=0, sed=1234, fam="poisson", lin="log")
 #' print(ridge_RR)
+#' # Install boot package if necessary
 #' bt_2 <- boot.ci(ridge_RR,type="perc",index=1)
 #' print(c("CI of variable_",1))
 #' print(c(bt_2$t0,bt_2$percent[4:5]))
