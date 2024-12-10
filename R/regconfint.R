@@ -23,7 +23,6 @@
 #' @return return the bootstrap confidence interval from glmnet object
 #' @export
 #' @examples
-#'
 #' #Data set creation
 #' n <- 500
 #' x1 <- rnorm(n, mean = 50, sd = 10)
