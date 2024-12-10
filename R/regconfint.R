@@ -56,7 +56,6 @@
 #' print(c(Pena_name, "CI of variable_",i))
 #' print(c(bt$t0,bt$percent[4:5]))
 #' }
-#' bt
 #'
 #' #Poisson with log-link
 #' # Ridge regression
@@ -71,12 +70,8 @@
 #' print(c("CI of variable_",i))
 #' print(c(bt$t0,bt$percent[4:5]))
 #' }
-#' bt
 #'
-#' # If paral = "Y", parallel computing will be implemented based on the number of cores available
-#' # in your computer
-#'
-
+#' # If paral = "Y", parallel computing will be implemented based on the number of cores available in your computer
 
 regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all",paral="N")
 {if (length(al) == 1){

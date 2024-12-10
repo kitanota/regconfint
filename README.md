@@ -64,8 +64,7 @@ devtools::install_github("kitanota/regconfint")
  print(c("CI of variable_",i))
  print(c(bt$t0,bt$percent[4:5]))
  }
-# If paral = "Y", parallel computing will be implemented based on the number of cores available
-# in your computer
+# If paral = "Y", parallel computing will be implemented based on the number of cores available in your computer
 
 ``` r
 library(regconfint)
