@@ -1,7 +1,7 @@
 Package: regconfint
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.0.1
+Version: 1.0.0
 Author: Takahiro Kitano
 Maintainer: Takahiro Kitano <takahiro.kitano@gmail.com>
 Description: Estimate confidence intervals for regularized regression
