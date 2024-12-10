@@ -47,9 +47,9 @@
 #' # Ridge regression
 #' ridge_RD <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=0, sed=1234, fam="gaussian", lin="identity")
 #' # Lasso regression
-#' lasso_RD <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=1, sed=1234, fam="gaussian", lin="identity")
+#' # lasso_RD <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=1, sed=1234, fam="gaussian", lin="identity")
 #' # Elastic-net
-#' El_RD <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=seq(0.01,0.99,0.01), sed=1234, fam="gaussian",lin="identity", paral="N")
+#' # El_RD <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=seq(0.01,0.99,0.01), sed=1234, fam="gaussian",lin="identity", paral="N")
 #' # Percentile bootstrap confidence intervals for ridge
 #' for (i in 1:num_var) {
 #' bt <- boot.ci(ridge_RD,type="perc",index=i)
@@ -61,9 +61,9 @@
 #' # Ridge regression
 #' ridge_RR <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=0, sed=1234, fam="poisson", lin="log")
 #' # Lasso regression
-#' lasso_RR <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=1, sed=1234, fam="poisson", lin="log")
+#' # lasso_RR <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=1, sed=1234, fam="poisson", lin="log")
 #' # Elastic-net
-#' El_RR <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=seq(0.01,0.99,0.01), sed=1234, fam="poisson",lin="log", paral="N")
+#' # El_RR <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=seq(0.01,0.99,0.01), sed=1234, fam="poisson",lin="log", paral="N")
 #' # Percentile bootstrap confidence intervals for ridge
 #' for (i in 1:num_var) {
 #' bt <- boot.ci(ridge_RR,type="perc",index=i)
