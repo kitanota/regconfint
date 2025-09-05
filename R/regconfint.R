@@ -70,16 +70,18 @@
 #' # Elastic-net
 #' El_RR <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=seq(0.01,0.99,0.01), sed=1234, fam="poisson",lin="log", paral="N")
 #'
+#' # If paral = "Y", parallel computing will be implemented based on the number of cores available in your computer
+#'
+#' # Bias-corrected bootstrap confidence intervals for ridge
+#' BC_CI <- bc_ci(ridge_RR,conf=0.95)
+#' print(BC_CI)
+#'
 #' # Percentile bootstrap confidence intervals for ridge
-#' # For other types of confidence intervals, please see boot pakage
+#' # For other types of confidence intervals, modify the type argument. For more details, please see the instruction of boot pakage
 #' for (i in 1:num_var) { bt <- boot.ci(ridge_RR,type="perc",index=i)
 #' print(c("CI of variable_",i))
 #' print(c(bt$t0,bt$percent[4:5])) }
 #'
-#' # Bias-corrected bootstrap confidence intervals for ridge
-#
-'
-#' # If paral = "Y", parallel computing will be implemented based on the number of cores available in your computer
 
 regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all",paral="N")
 {if (length(al) == 1){
@@ -218,3 +220,42 @@ boot_out
 }
 }
 
+#' @title Bias-corrected bootstrap confidence interval
+#' @description Computes bias-corrected bootstrap confidence intervals from a boot object.
+#' @param boot.obj Boot object returned by \code{regconfint()}.
+#' @param conf Confidence level (default = 0.95).
+#' @return Data frame of bias-corrected CIs.
+#' @export
+
+bc_ci <- function(boot.obj, conf = 0.95) {
+  t_boot <- boot.obj$t
+  t0     <- boot.obj$t0
+  nstat  <- ncol(t_boot)
+
+  alpha <- (1 - conf) / 2
+  z_alpha <- qnorm(1 - alpha)
+
+  CI_BC <- data.frame(matrix(NA, nrow = nstat, ncol = 2))
+
+  for (i in 1:nstat) {
+    t_j <- t_boot[, i]
+    t0_i <- t0[i]
+
+    prop_less <- mean(t_j < t0_i, na.rm = TRUE)
+
+    if (!prop_less %in% c(0, 1)) {
+      z0 <- qnorm(prop_less)
+
+      alpha_l <- pnorm(2 * z0 - z_alpha)
+      alpha_u <- pnorm(2 * z0 + z_alpha)
+
+      ci <- tryCatch({
+        quantile(t_j, probs = c(alpha_l, alpha_u), na.rm = TRUE)
+      }, error = function(e) c(NA_real_, NA_real_))
+
+      CI_BC[i, ] <- ci
+    }
+  }
+
+  return(CI_BC)
+}
