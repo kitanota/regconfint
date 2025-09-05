@@ -77,7 +77,8 @@
 #' print(c(bt$t0,bt$percent[4:5])) }
 #'
 #' # Bias-corrected bootstrap confidence intervals for ridge
-#'
+#
+'
 #' # If paral = "Y", parallel computing will be implemented based on the number of cores available in your computer
 
 regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all",paral="N")
