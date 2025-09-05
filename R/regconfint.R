@@ -45,6 +45,7 @@
 #' print(dataset)
 #'
 #' #gaussian with identity-link
+<<<<<<< HEAD
 #'
 #' # Ridge regression
 #' ridge_RD <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=0, sed=1234, fam="gaussian", lin="identity")
@@ -76,6 +77,36 @@
 #' print(c(bt$t0,bt$percent[4:5])) }
 #'
 #' #
+=======
+#' # Ridge regression
+#' ridge_RD <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=100, al=0, sed=1234, fam="gaussian", lin="identity")
+#' print(ridge_RD)
+#' # Install boot package if necessary
+#' bt_1 <- boot.ci(ridge_RD,type="perc",index=1)
+#' print(c("CI of variable_",1))
+#' print(c(bt_1$t0,bt_1$percent[4:5]))
+#'
+#' # Lasso regression
+#' # lasso_RD <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=100, al=1, sed=1234, fam="gaussian", lin="identity")
+#' # Elastic-net
+#' # El_RD <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=100, al=seq(0.01,0.99,0.01), sed=1234, fam="gaussian",lin="identity", paral="N")
+#' # Percentile bootstrap confidence intervals for ridge
+#'
+#' #Poisson with log-link
+#' # Ridge regression
+#' ridge_RR <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=100, al=0, sed=1234, fam="poisson", lin="log")
+#' print(ridge_RR)
+#' # Install boot package if necessary
+#' bt_2 <- boot.ci(ridge_RR,type="perc",index=1)
+#' print(c("CI of variable_",1))
+#' print(c(bt_2$t0,bt_2$percent[4:5]))
+#'
+#' # Lasso regression
+#' # lasso_RR <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=100, al=1, sed=1234, fam="poisson", lin="log")
+#' # Elastic-net
+#' # El_RR <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=100, al=seq(0.01,0.99,0.01), sed=1234, fam="poisson",lin="log", paral="N")
+#' # Percentile bootstrap confidence intervals for ridge
+>>>>>>> 74e252fe13eb00abf1517062a5862e7948ca12d2
 #'
 #' # If paral = "Y", parallel computing will be implemented based on the number of cores available in your computer
 
