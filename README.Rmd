@@ -93,8 +93,6 @@ library(regconfint)
 #' for (i in 1:num_var) { bt <- boot.ci(ridge_RR,type="perc",index=i)
 #' print(c("CI of variable_",i))
 #' print(c(bt$t0,bt$percent[4:5])) }
-#'
-
 ```
 
 What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
