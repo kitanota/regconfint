@@ -107,7 +107,7 @@ regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all",paral="N")
     cvfit_1 <- glmnet::cv.glmnet(x, y, family = family_obj,alpha = al)
     s <- cvfit_1$lambda.min
     fit <- glmnet::glmnet(x, y, family = family_obj,alpha = al, lambda = s)
-    r <- exp(fit$beta)
+    r <- fit$beta
     return(r[1:length(expv)])
   }
   set.seed(sed)
@@ -121,7 +121,7 @@ regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all",paral="N")
   num_cores <- parallel::detectCores()
   cl <- parallel::makeCluster(num_cores - 2)  # 使用するコア数に合わせて変更
   doParallel::registerDoParallel(cl)
-  foreach::foreach(i = 1:length(al), .combine = rbind, .packages = 'glmnet',.export = c("fam", "lin","x","y","al") ) %dopar% {
+  mse.df <- foreach::foreach(i = 1:length(al), .combine = rbind, .packages = 'glmnet',.export = c("fam", "lin","x","y","al") ) %dopar% {
     family_obj <- switch(fam,
                          "gaussian" = gaussian(link = lin),
                          "binomial" = binomial(link = lin),
@@ -160,7 +160,7 @@ get_RR <- function(d,i){
   cvfit <- glmnet::cv.glmnet(x, y, family = family_obj,alpha = best_alpha)
   s <- cvfit$lambda.min
   fit <- glmnet::glmnet(x, y, family = family_obj,alpha = best_alpha, lambda = s)
-  r <- exp(fit$beta)
+  r <- fit$beta
   return(r[1:length(expv)])
 }
 set.seed(sed)
@@ -210,7 +210,7 @@ boot_out
     cvfit <- glmnet::cv.glmnet(x, y, family = family_obj,alpha = best_alpha)
     s <- cvfit$lambda.min
     fit <- glmnet::glmnet(x, y, family = family_obj,alpha = best_alpha, lambda = s)
-    r <- exp(fit$beta)
+    r <- fit$beta
     return(r[1:length(expv)])
   }
   set.seed(sed)
