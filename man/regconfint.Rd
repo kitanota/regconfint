@@ -77,9 +77,13 @@ lasso_RD <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7")
 # Elastic-net
 El_RD <- regconfint(dataset, expv=c("x1", "x2", "x3", "x4", "x5", "x6", "x7"), tarv="y", itr=200, al=seq(0.01,0.99,0.01), sed=1234, fam="gaussian",lin="identity", paral="N")
 
+# Bias-corrected bootstrap confidence intervals for ridge
+BC_CI <- bc_ci(ridge_RD,conf=0.95)
+print(BC_CI)
+
 # Percentile bootstrap confidence intervals for ridge
-for (i in 1:num_var) { bt <- boot.ci(ridge_RD,type="perc",index=i)
-print(c(Pena_name, "CI of variable_",i))
+for (i in 1:num_var) { bt <- boot::boot.ci(ridge_RD,type="perc",index=i)
+print(c("CI of variable_",i))
 print(c(bt$t0,bt$percent[4:5])) }
 #'
 #Poisson with log-link
@@ -100,7 +104,7 @@ print(BC_CI)
 
 # Percentile bootstrap confidence intervals for ridge
 # For other types of confidence intervals, modify the type argument. For more details, please see the instruction of boot pakage
-for (i in 1:num_var) { bt <- boot.ci(ridge_RR,type="perc",index=i)
+for (i in 1:num_var) { bt <- boot::boot.ci(ridge_RR,type="perc",index=i)
 print(c("CI of variable_",i))
 print(c(bt$t0,bt$percent[4:5])) }
 
