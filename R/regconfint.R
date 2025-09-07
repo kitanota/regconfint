@@ -121,7 +121,7 @@ regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all",paral="N")
   num_cores <- parallel::detectCores()
   cl <- parallel::makeCluster(num_cores - 2)  # 使用するコア数に合わせて変更
   doParallel::registerDoParallel(cl)
-  mse.df <- foreach::foreach(i = 1:length(al), .combine = rbind, .packages = 'glmnet',.export = c("fam", "lin","x","y","al") ) %dopar% {
+  mse.df <- foreach::foreach(i = 1:length(al), .combine = rbind, .packages = 'glmnet',.export = c("fam", "lin","al") ) %dopar% {
     family_obj <- switch(fam,
                          "gaussian" = gaussian(link = lin),
                          "binomial" = binomial(link = lin),
