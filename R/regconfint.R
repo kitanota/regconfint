@@ -116,7 +116,7 @@ regconfint <- function(dataset,expv,tarv,itr,al,sed,fam,lin,typ="all",paral="N")
   # result
   boot_out
 } else if(length(al) > 1 & paral=="Y")
-  {get_alpha <- function(){
+  {get_alpha <- function(x,y){
   mse.df <- NULL
   num_cores <- parallel::detectCores()
   cl <- parallel::makeCluster(num_cores - 2)  # 使用するコア数に合わせて変更
@@ -156,7 +156,7 @@ get_RR <- function(d,i){
                        stop("Invalid fam argument")
   )
 
-  best_alpha <- get_alpha()
+  best_alpha <- get_alpha(x,y)
   cvfit <- glmnet::cv.glmnet(x, y, family = family_obj,alpha = best_alpha)
   s <- cvfit$lambda.min
   fit <- glmnet::glmnet(x, y, family = family_obj,alpha = best_alpha, lambda = s)
@@ -169,7 +169,7 @@ boot_out <- boot::boot(dataset, statistic = get_RR, R = itr)
 # result
 boot_out
 } else {
-  get_alpha <- function(){
+  get_alpha <- function(x,y){
     mse.df <- NULL
     for (i in 1:length(al)) {
       family_obj <- switch(fam,
@@ -206,7 +206,7 @@ boot_out
                          stop("Invalid fam argument")
     )
 
-    best_alpha <- get_alpha()
+    best_alpha <- get_alpha(x,y)
     cvfit <- glmnet::cv.glmnet(x, y, family = family_obj,alpha = best_alpha)
     s <- cvfit$lambda.min
     fit <- glmnet::glmnet(x, y, family = family_obj,alpha = best_alpha, lambda = s)
