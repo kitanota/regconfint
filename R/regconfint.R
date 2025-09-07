@@ -10,6 +10,7 @@
 #' @importFrom parallel makeCluster
 #' @importFrom doParallel registerDoParallel
 #' @importFrom foreach foreach
+#' @importFrom foreach %dopar%
 #' @param dataset A data frame containing the data used for the estimation of confidence interval. It should include both the explanatory and target variables specified in expv and tarv.
 #' @param expv A character vector specifying the names of the explanatory variables (predictors) in the dataset.
 #' @param tarv A character string specifying the name of the target variable (response variable) in the dataset.
